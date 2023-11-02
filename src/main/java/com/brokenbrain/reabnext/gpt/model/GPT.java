@@ -49,14 +49,14 @@ public class GPT {
     @Embedded
     private Usage usage;
 
-    @Column(name = "INPUT_GPT",  length = 5000)
+    @Column(name = "INPUT_GPT",  length = 3000)
     private final String inputGpt = """
             Gere uma lista com uma rotina de %s dias de treino de fiseoterapia (cada dia sendo um item da lista) a partir de %s para uma pessoa com deficiencia ( %s ) em reabilitacao, pesando %,.0f Kg, com %,.2f metros de altura e com %s anos de idade.""";
 
     @Column(name = "PROMPT_GPT")
     private String inputGptPrompt;
 
-    @Column(name = "output",  length = 5000)
+    @Column(name = "output",  length = 3000)
     private String outputGpt;
     
     public GPT() {

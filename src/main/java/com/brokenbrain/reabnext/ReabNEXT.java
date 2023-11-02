@@ -68,8 +68,8 @@ public class ReabNEXT {
     private static Map<String, Object> getTeinoGerado(String prompt) {
         GptService service = new GptService();
         service.setPROMPT( prompt );
-        var teinoGerado = service.gerarTreino();
-        return teinoGerado;
+        var treinoGerado = service.gerarTreino();
+        return treinoGerado;
     }
 
     private static Treino getTreino(Paciente usuario) {

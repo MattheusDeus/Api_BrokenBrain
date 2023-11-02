@@ -72,12 +72,13 @@ public class GptService {
             } else {
 
                 // - Passando o input para a requisição POST
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader( response.getEntity().getContent() ) );
+                BufferedReader reader = new BufferedReader(new InputStreamReader( response.getEntity().getContent() ) );
 
                 // - outputGpt é a variável onde recebe o output da API da OpenAI e printa no console
                 String outputGpt;
+
                 System.out.println( "\n\nGPT Resposta: \n" );
+
                 // - objectMapper é instância do mapeamento do JSON de output da API da OpenAI
                 ObjectMapper objectMapper = new ObjectMapper();
                 // - Enquanto houver linha de resposta(diferente de nulo) do output da API da OpenAI
