@@ -20,12 +20,12 @@ public class ReabNEXT {
     public static void main(String[] args) {
 
         // - Instanciando EntityManager e setando banco de dados
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("maria-db");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("oracle");
         EntityManager manager = factory.createEntityManager();
 
         // - Instanciando Paciente(usuario) com Nome, Data de nascimento, Peso, Altura e Descrição da deficiência
         var usuario = new Paciente();
-        usuario.setNome("Matheus");
+        usuario.setNome("Giulyah");
         usuario.setDtNasc(LocalDate.now().minusYears(38));
         usuario.setPeso(58);
         usuario.setAltura(1.77f);
