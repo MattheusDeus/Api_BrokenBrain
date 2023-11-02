@@ -10,6 +10,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -17,14 +18,14 @@ import java.util.Map;
 public class GptService {
 
     // - Setando parâmetros de entrada para o input na API da Open AI -
-    private static String KEY = "";
+    private static String KEY = "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";
     private String PROMPT = "";
     private long MAX_TOKENS = 1000;
     private float TEMPERATURE = 1;
     private String MODEL = "text-davinci-003";
 
     // - outputGptMap é o mapeamento do Json do Output da API da OpenAI
-    private Map<String, Object> outputGptMap;
+    private Map<String, Object> outputGptMap = new LinkedHashMap<>();
     public Map<String, Object> getOutputGptMap() {
         return outputGptMap;
     }

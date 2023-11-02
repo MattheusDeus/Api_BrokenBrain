@@ -11,6 +11,7 @@ import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 public class ReabNEXT {
@@ -48,13 +49,23 @@ public class ReabNEXT {
         GptService service = new GptService();
         service.setPROMPT(prompt);
         service.gerarTreino();
-        gpt.setOutputGpt( service.getOutputGptMap().toString() );
-        System.out.println( service );
 
-        // - Usando o manager(Instância de EntityManager) para fazer persistência dos dados
-        manager.getTransaction().begin();
-        manager.persist(gpt);
-        manager.getTransaction().commit();
+
+     if(Objects.nonNull( service.getOutputGptMap() )) {
+         service.getOutputGptMap().forEach( (k, v)->{
+             System.out.println("Chave: " + k + "Valor: " + v);
+         } );
+
+         gpt.setOutputGpt( service.getOutputGptMap().toString() );
+         System.out.println( service );
+
+         // - Usando o manager(Instância de EntityManager) para fazer persistência dos dados
+         manager.getTransaction().begin();
+         manager.persist(gpt);
+         manager.getTransaction().commit();
+     }
+
+
         manager.close();
         factory.close();
 
