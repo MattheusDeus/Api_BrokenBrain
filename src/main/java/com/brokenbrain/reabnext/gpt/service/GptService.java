@@ -18,7 +18,7 @@ import java.util.Map;
 public class GptService {
 
     // - Setando parâmetros de entrada para o input na API da Open AI -
-    private static String KEY = "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";
+    private static String KEY = "";
     private String PROMPT = "";
     private long MAX_TOKENS = 1000;
     private float TEMPERATURE = 1;
