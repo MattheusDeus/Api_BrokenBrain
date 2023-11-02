@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Data
 public class GptService {
-    private static final String KEY = "sk";
+    private static final String KEY = "key_gpt";
     private String PROMPT = "";
     private long MAX_TOKENS = 1000;
     private float TEMPERATURE = 1;
@@ -52,8 +52,7 @@ public class GptService {
             }
 
             BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(response.getEntity().getContent())
-            );
+                    new InputStreamReader(response.getEntity().getContent()));
 
             // Read the API response into a StringBuilder
             StringBuilder outputBuilder = new StringBuilder();
