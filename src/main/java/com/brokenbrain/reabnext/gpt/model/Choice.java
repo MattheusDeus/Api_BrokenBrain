@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "TB_CHOICE")
+@Table(name = "ChoiceReabnext")
 public class Choice {
     @Id
     @GeneratedValue(generator = "SQ_CHOICE", strategy = GenerationType.SEQUENCE)

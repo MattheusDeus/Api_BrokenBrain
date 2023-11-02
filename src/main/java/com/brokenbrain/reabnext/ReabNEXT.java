@@ -1,5 +1,6 @@
 package com.brokenbrain.reabnext;
 
+import com.brokenbrain.reabnext.gpt.model.Choice;
 import com.brokenbrain.reabnext.gpt.model.GPT;
 import com.brokenbrain.reabnext.gpt.service.GptService;
 import com.brokenbrain.reabnext.paciente.model.Paciente;
@@ -11,6 +12,7 @@ import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 
 public class ReabNEXT {
@@ -23,11 +25,11 @@ public class ReabNEXT {
 
         // - Instanciando Paciente(usuario) com Nome, Data de nascimento, Peso, Altura e Descrição da deficiência
         var usuario = new Paciente();
-        usuario.setNome("Alvaro");
+        usuario.setNome("Matheus");
         usuario.setDtNasc(LocalDate.now().minusYears(38));
         usuario.setPeso(58);
         usuario.setAltura(1.77f);
-        usuario.setDescDeficiencia("Braco esquerdo amputado na altura do ombro");
+        usuario.setDescDeficiencia("Braco direito amputado na altura do ombro");
 
         // - Instanciando Treino com quantidade de dias de treino, data de início e data de término(com base na qtd de dias de treino)
         // - e descrição da deficiência. Esses dados são usados no input da API da OpenAI
@@ -48,12 +50,12 @@ public class ReabNEXT {
         GptService service = new GptService();
         service.setPROMPT(prompt);
         service.gerarTreino();
-        gpt.setOutputGpt( service.getOutputGptMap().toString() );
-        System.out.println( service );
-
         // - Usando o manager(Instância de EntityManager) para fazer persistência dos dados
         manager.getTransaction().begin();
+        System.out.println(service.getOutputGptMap().get("choices").toString().length());
+        gpt.setOutputGpt(service.getOutputGptMap().get("choices").toString());
         manager.persist(gpt);
+        manager.persist(treino);
         manager.getTransaction().commit();
         manager.close();
         factory.close();

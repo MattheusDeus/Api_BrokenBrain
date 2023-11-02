@@ -40,10 +40,7 @@ public class GPT {
     )
     private Treino treino;
 
-    // - Relacionamento de Um para Muitos (1:N) De: Choices(N) para GPT(1)
-    // - Esse relacionamento existe por conta da API da OpenAI poder gerar multiplos outputs para um input
-    @OneToMany(mappedBy = "gpt", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Choice> choices = new LinkedHashSet<>();
+    private String choices;
 
     @Embedded
     private Usage usage;
@@ -54,7 +51,7 @@ public class GPT {
 
     @Column(name = "PROMPT_GPT")
     private String inputGptPrompt;
-    @Column(name = "output", columnDefinition = "TEXT")
+    @Column(name = "output", columnDefinition = "TEXT", length = 5000)
     private String outputGpt;
     
     public GPT() {
@@ -64,7 +61,7 @@ public class GPT {
         this.treino = treino;
     }
 
-    public GPT(String id, String object, LocalDate created, String model, Treino treino, Set<Choice> choices) {
+    public GPT(String id, String object, LocalDate created, String model, Treino treino, String choices) {
         this.id = id;
         this.object = object;
         this.created = created;
@@ -148,11 +145,11 @@ public class GPT {
         return this;
     }
 
-    public Set<Choice> getChoices() {
+    public String getChoices() {
         return choices;
     }
 
-    public GPT setChoices(Set<Choice> choices) {
+    public GPT setChoices(String choices) {
         this.choices = choices;
         return this;
     }
