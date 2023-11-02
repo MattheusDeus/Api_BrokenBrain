@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "ChoiceReabnext")
+@Table(name = "TB_CHOICE")
 public class Choice {
     @Id
     @GeneratedValue(generator = "SQ_CHOICE", strategy = GenerationType.SEQUENCE)
@@ -21,7 +21,7 @@ public class Choice {
     @JoinColumn(
             name = "ID_GPT",
             referencedColumnName = "ID_GPT",
-            foreignKey = @ForeignKey(name = "FK_GPT_CHOICE", value = ConstraintMode.CONSTRAINT)
+            foreignKey = @ForeignKey(name = "FK_GPT_CHOICE_GPT")
     )
     private GPT gpt;
 

@@ -7,20 +7,20 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "TB_Treino")
+@Table(name = "TB_TREINO")
 public class Treino {
 
     @Id
-    @GeneratedValue(generator = "SQ_TREINO", strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "SQ_TREINO", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "SQ_TREINO", sequenceName = "SQ_TREINO")
-    @Column(name = "ID_Treino")
+    @Column(name = "ID_TREINO")
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(
             name = "ID_PACIENTE",
             referencedColumnName = "ID_PACIENTE",
-            foreignKey = @ForeignKey(name = "FK_TREINO_PACIENTE", value = ConstraintMode.CONSTRAINT)
+            foreignKey = @ForeignKey(name = "FK_TREINO_PACIENTE")
     )
     private Paciente paciente;
 
@@ -32,7 +32,7 @@ public class Treino {
     LocalDateTime dtGeracao;
 
     @Column(name = "NR_DIAS")
-    int qtdDias;
+    private Integer qtdDias;
 
     @Column(name = "DT_INICIO")
     private
@@ -106,5 +106,16 @@ public class Treino {
         return this;
     }
 
-
+    @Override
+    public String toString() {
+        return "Treino{" +
+                "id=" + id +
+                ", paciente=" + paciente +
+                ", descDeficiencia='" + descDeficiencia + '\'' +
+                ", dtGeracao=" + dtGeracao +
+                ", qtdDias=" + qtdDias +
+                ", dtInicio=" + dtInicio +
+                ", dtFim=" + dtFim +
+                '}';
+    }
 }

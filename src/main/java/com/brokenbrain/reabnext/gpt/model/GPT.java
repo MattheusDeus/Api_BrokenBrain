@@ -6,8 +6,6 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 
 @Entity
@@ -18,17 +16,23 @@ public class GPT {
     @GeneratedValue(generator = "SQ_GPT", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "SQ_GPT", sequenceName = "SQ_GPT")
     @Column(name = "ID_GPT")
+    private
     Long idGpt;
-    @Column(name = "API_ID_GPT")
+
+    @Column(name = "API_ID")
+    private
     String id;
 
     @Column(name = "OBJ_GPT")
+    private
     String object;
 
-    @Column(name = "DT_CRIACAO_GPT")
+    @Column(name = "DT_CRIACAO")
+    private
     LocalDate created;
 
-    @Column(name = "NM_MODEL_GPT")
+    @Column(name = "NM_MODEL")
+    private
     String model;
 
     // - Relacionamento de Muitos para Um (N:1) De: Treino(N) para GPT(1)
@@ -36,7 +40,7 @@ public class GPT {
     @JoinColumn(
             name = "ID_TREINO",
             referencedColumnName = "ID_TREINO",
-            foreignKey = @ForeignKey(name = "FK_GPT_TREINO", value = ConstraintMode.CONSTRAINT)
+            foreignKey = @ForeignKey(name = "FK_GPT_TREINO")
     )
     private Treino treino;
 
@@ -45,13 +49,14 @@ public class GPT {
     @Embedded
     private Usage usage;
 
-    @Column(name = "INPUT_GPT")
+    @Column(name = "INPUT_GPT",  length = 5000)
     private final String inputGpt = """
             Gere uma lista com uma rotina de %s dias de treino de fiseoterapia (cada dia sendo um item da lista) a partir de %s para uma pessoa com deficiencia ( %s ) em reabilitacao, pesando %,.0f Kg, com %,.2f metros de altura e com %s anos de idade.""";
 
     @Column(name = "PROMPT_GPT")
     private String inputGptPrompt;
-    @Column(name = "output", columnDefinition = "TEXT", length = 5000)
+
+    @Column(name = "output",  length = 5000)
     private String outputGpt;
     
     public GPT() {
@@ -154,20 +159,39 @@ public class GPT {
         return this;
     }
 
+    public Usage getUsage() {
+        return usage;
+    }
+
+    public GPT setUsage(Usage usage) {
+        this.usage = usage;
+        return this;
+    }
+
+    public String getInputGpt() {
+        return inputGpt;
+    }
+
+    public GPT setInputGptPrompt(String inputGptPrompt) {
+        this.inputGptPrompt = inputGptPrompt;
+        return this;
+    }
+
+
     @Override
     public String toString() {
         return "GPT{" +
-                "code=" + idGpt +
+                "idGpt=" + idGpt +
                 ", id='" + id + '\'' +
                 ", object='" + object + '\'' +
                 ", created=" + created +
                 ", model='" + model + '\'' +
                 ", treino=" + treino +
-                ", choices=" + choices +
+                ", choices='" + choices + '\'' +
                 ", usage=" + usage +
-                ", v='" + inputGpt + '\'' +
-                ", prompt='" + inputGptPrompt + '\'' +
-                ", output='" + outputGpt + '\'' +
+                ", inputGpt='" + inputGpt + '\'' +
+                ", inputGptPrompt='" + inputGptPrompt + '\'' +
+                ", outputGpt='" + outputGpt + '\'' +
                 '}';
     }
 }
